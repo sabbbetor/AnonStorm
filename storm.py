@@ -43,17 +43,19 @@ def do_something(sc):
         while True:
                 try:
                     if len(status) > 140:
-                        raise Exception(status,'\n Message is too long!')
+                        print 'This [',status[:20],'...',status[-20:],'] Tweet has more than 140 characters! \n\n Please contact the owner of the paste, TheDentist on #opindia at anonops.\n'
                         stat = contents[random.randrange(0,len(contents))]
-                    print "Tweeting...", st
-                    print "", status
-                    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-                    auth.set_access_token(ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET)
-                    api = tweepy.API(auth)
-                    result = api.update_status(status)
-                    break
+                        status = stat[:-2]
+                    else:
+                        print "\nTweeting...", st
+                        print "", status
+                        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+                        auth.set_access_token(ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET)
+                        api = tweepy.API(auth)
+                        result = api.update_status(status)
+                        break
                 except tweepy.error.TweepError as e:
-                        print("Twitter error received...", e.message)
+                        print("\nTwitter error received...", e.message)
                         print("Trying again...")
                         stat = contents[random.randrange(0,len(contents))]
  
