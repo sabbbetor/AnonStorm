@@ -44,4 +44,4 @@ If you have any issues running this application speak to __sabbbet__ in AnonOps 
 
 Original source of AnonStorm v1.0 - https://github.com/somer4ndompunk/AnonStorm 
 
-__* sabbbet *__
+__sabbbet__
