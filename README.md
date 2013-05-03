@@ -5,6 +5,12 @@ AnonStorm is a simple TwitterStorm script written in Python.
 This tool is to make life easier for participants of activist related twitter storms.
 It's design automates your tweets using a hosted text file so you don't have to copy/paste manually.
 
+## Cautions 
+
+*Dont use this on a account that you care for.*
+
+*Use this bot on an indian twitter account.*
+
 ## Setup:
 
 ### Linux Users
