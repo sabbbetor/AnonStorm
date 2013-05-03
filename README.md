@@ -12,7 +12,16 @@ Run the following commands :
 
 * sudo apt-get install python python-dev
 * sudo apt-get install python-pip
+
+If you want to run this script in a virtualenv then you could use :
+* sudo pip install virtualenv
+* virtualenv AnonStorm --distribute (Run this when in the AnonStrom directory to create a virtualenv.)
+
+Then install all the dependencies with :
+
 * sudo pip install -r requirements.txt
+  or
+* pip install -r requirements.txt (When in an vitualenv)
 
 ### Dependencies
 
