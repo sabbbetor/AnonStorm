@@ -44,6 +44,7 @@ def do_something(sc):
                 try:
                     if len(status) > 140:
                         raise Exception(status,'\n Message is too long!')
+                        stat = contents[random.randrange(0,len(contents))]
                     print "Tweeting...", st
                     print "", status
                     auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
