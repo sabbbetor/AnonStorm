@@ -31,26 +31,34 @@ Then install all the dependencies with :
 Windows user will have to go about it as follows :
 
 > Replace XX with your python version number. Example: Python10, Python27, Python31, etc*
+
 > Read this: https://python-guide.readthedocs.org/en/latest/starting/install/win.html
+
 > Install Python
+
 > Create scripts folder in C:\PythonXX -> "C:\PythonXX\Scripts"
 
 ## Pip & Distribute setup
 
 > Save http://python-distribute.org/distribute_setup.py to scripts folder (You do not need virtualenv)
+
 > Set environment variables. Change the system variable "path" and add ";C:\Python27\;C:\Python27\Scripts\"
+
 > Open CMD
+
 > cd C:\PythonXX
+
 > execute easy_install pip
+
 > Let it run the setup and wait for it to finish
 
 ## Install dependencies
 
-> execute pip install httplib2
-> execute pip install oauth
-> execute pip install oauth2
-> execute pip install python-twitter
-> execute pip install tweepy
+* execute pip install httplib2
+* execute pip install oauth
+* execute pip install oauth2
+* execute pip install python-twitter
+* execute pip install tweepy
 
 ----------------------------------------------
 
