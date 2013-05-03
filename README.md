@@ -7,7 +7,7 @@ It's design automates your tweets using a hosted text file so you don't have to 
 
 ## Setup:
 
-## Linux Users
+### Linux Users
 
 Run the following commands :
 
@@ -26,7 +26,7 @@ Then install all the dependencies with :
 
 -------------------------------------------
 
-## Windows Users
+### Windows Users
 
 Windows user will have to go about it as follows :
 
@@ -38,7 +38,7 @@ Windows user will have to go about it as follows :
 
 > Create scripts folder in C:\PythonXX -> "C:\PythonXX\Scripts"
 
-## Pip & Distribute setup
+### Pip & Distribute setup
 
 > Save http://python-distribute.org/distribute_setup.py to scripts folder (You do not need virtualenv)
 
@@ -52,13 +52,17 @@ Windows user will have to go about it as follows :
 
 > Let it run the setup and wait for it to finish
 
-## Install dependencies
+### Install dependencies
 
-* execute pip install httplib2
-* execute pip install oauth
-* execute pip install oauth2
-* execute pip install python-twitter
-* execute pip install tweepy
+> execute pip install httplib2
+
+> execute pip install oauth
+
+> execute pip install oauth2
+
+> execute pip install python-twitter
+
+> execute pip install tweepy
 
 ----------------------------------------------
 
