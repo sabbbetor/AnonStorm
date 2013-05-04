@@ -1,27 +1,29 @@
+#!/usr/bin/python2.7
 # AnonStorm twitterstorm bot
 #
-# Updated version v3 by sabbbet for @StopICMS only
+# Updated version v2 by sabbbet for @StopICMS only
 # This version uses tweepy as the older version uses old twitter API.
+# This version also handles multiple accounts efficiently.
 #
 # This script, as it sits will pull from an online file.
 # It will pull a random tweet from the hosted file, and tweet every 2 minutes a new random tweet.
 # 
 # You MUST run the auth.py script first to obtain your access_token_key and your access_token_secret. This will authorize the app with your twitter account.
-# Once you verify the pin, you MUST update the appropriate strings access_token_key and access_token_secret with the key and secret auth.py gives you.
+# Once you verify the pin, auth.py automatically updates the appropriate strings access_token_key and access_token_secret in TOKENS_SECRETS.conf.
 # You can run auth.py for as many accounts you want to use the storm for.
+#
 #
 # A VERY special thanks to The, Happyface, Prophet and kyzersane for their work on its original script.
 #
 #
-# Version 3.0
+# Version 2.0
 
 import time, datetime, sched, random
 import urllib2
 import tweepy
-import sys
 import re
 
-print('\nWelcome to AnonStorm v3.0 | This is developed for @StopICMS only, Happy Tweeting!')
+print('\nWelcome to AnonStorm v2.0 | This is developed for @StopICMS only, Happy Tweeting!')
 
 ACCESS_TOKEN_KEY = ''
 ACCESS_TOKEN_SECRET = ''
@@ -35,7 +37,7 @@ lines = file_read.read()
 matches = re.findall(r'KEY = ([\w\-\w]+) SECRET = ([\w\-\w]+)',lines)
 looper = len(matches)
 if looper == 0:
-    print "\n\n\nYou will have to run auth.py so that it can add your ACCESS_TOKEN_KEY and ACCESS_TOKEN_SECRET for one or more accounts in TOKENS_SECRETS.conf file"
+    print "\n\n\nYou will have to run auth.py so that it can store your ACCESS_TOKEN_KEY and ACCESS_TOKEN_SECRET keys of one or more accounts in TOKENS_SECRETS.conf file."
     print "\nThis is done in order to use multiple account at once for a better storm."
     print "\nYou can run auth.py for as many accounts you want to use the storm for."
     print "\n\n\n GoI beware, a storm is comming!"
@@ -67,8 +69,8 @@ def tweet(sc):
                         status = stat[:-2]
                     else:
                         ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET = keys_
-                        print "\nTweeting ... for ACCESS_TOKEN_KEY",ACCESS_TOKEN_KEY,"and ACCESS_TOKEN_SECRET",ACCESS_TOKEN_SECRET
-                        print "at", st
+                        print "\n Tweeting ... for account", loopy
+                        print "\tat", st
                         stat = contents[random.randrange(0,len(contents))]
                         status = stat[:-2]
                         print "", status

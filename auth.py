@@ -1,4 +1,4 @@
-#!/usr/bin/python2.4
+#!/usr/bin/python2.7
 #
 # Copyright 2007 The Python-Twitter Developers
 #
@@ -14,6 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+#
+# Added few lines to handle multiple accounts. To store the following :
+#
+#   Access Token key
+#   Access Token secret
+#
+# in TOKENS_SECRETS.conf file.
+#
 
 import os
 import sys
