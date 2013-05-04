@@ -25,6 +25,7 @@ try:
 except:
   from cgi import parse_qsl
 
+file_write = open("TOKENS_SECRETS.txt",'w')
 
 REQUEST_TOKEN_URL = 'https://api.twitter.com/oauth/request_token'
 ACCESS_TOKEN_URL  = 'https://api.twitter.com/oauth/access_token'
@@ -87,6 +88,10 @@ else:
   else:
     print 'Your Twitter Access Token key: %s' % access_token['oauth_token']
     print '          Access Token secret: %s' % access_token['oauth_token_secret']
+    
+    file_write.write(str(acess_token['oauth_token']) + ", " + str(acess_token['oauth_token_secret']) + '\n')
+    file_write.close()
+
     print ''
 
 

@@ -17,13 +17,27 @@
 import time, datetime, sched, random
 import urllib2
 import tweepy
-     
+import sys
+import re
+
 print('Welcome to AnonStorm v1.1 | This is developed for @StopICMS only, Happy Tweeting!')
 
-ACCESS_TOKEN_KEY='YOUR ACCESS TOKEN HERE'
-ACCESS_TOKEN_SECRET='YOUR ACCESS SECRET HERE'
+ACCESS_TOKEN_KEYS = {}
+ACCESS_TOKEN_SECRETS = {}
 CONSUMER_KEY='5VuZ39FbuRfFdr0CpNf3zg'
 CONSUMER_SECRET='5FPi40pwS3buTMFMXm8URXoRSCubw0LqM5KtTPkdo'
+
+print 'Getting ACCESS_TOKEN_KEY and ACCESS_TOKEN_SECRET of multiple accounts. from TOKENS_SECRETS.txt'
+
+file_read = open("TOKENS_SECRETS.txt","rU")
+lines = file_read.read()
+
+print lines
+
+matches = re.search(r'KEY = ([\w\-\w]+) SECRET = ([\w\-\w]+)',lines)
+print matches
+
+#print matches.group(1), matches.group(2)
 
 contents = []
 ts = time.time()
@@ -49,17 +63,19 @@ def do_something(sc):
                     else:
                         print "\nTweeting...", st
                         print "", status
+                        """
                         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
                         auth.set_access_token(ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET)
                         api = tweepy.API(auth)
                         result = api.update_status(status)
+                        """
                         break
                 except tweepy.error.TweepError as e:
                         print("\nTwitter error received...", e.message)
                         print("Trying again...")
                         stat = contents[random.randrange(0,len(contents))]
  
-        sc.enter(120, 1, do_something, (sc,)) #Edit the "120" if you wish to speed or slow down the tweets. Time is in seconds. IE: 120 = 2 minutes
+        sc.enter(1, 1, do_something, (sc,)) #Edit the "120" if you wish to speed or slow down the tweets. Time is in seconds. IE: 120 = 2 minutes
  
 s.enter(0, 1, do_something, (s,))
 s.run()
