@@ -20,7 +20,7 @@ import tweepy
 import sys
 import re
 
-print('\nWelcome to AnonStorm v3.0 | This is developed for @StopICMS only, Happy Tweeting!')
+print('\nWelcome to AnonStorm v2.0 | This is developed for @StopICMS only, Happy Tweeting!')
 
 ACCESS_TOKEN_KEY = ''
 ACCESS_TOKEN_SECRET = ''
@@ -29,13 +29,14 @@ CONSUMER_SECRET='5FPi40pwS3buTMFMXm8URXoRSCubw0LqM5KtTPkdo'
 
 print '\nGetting ACCESS_TOKEN_KEY and ACCESS_TOKEN_SECRET of multiple accounts. from TOKENS_SECRETS.txt'
 
-file_read = open("TOKENS_SECRETS.txt","rU")
+file_read = open("TOKENS_SECRETS.conf","rU")
 lines = file_read.read()
 
 matches = re.findall(r'KEY = ([\w\-\w]+) SECRET = ([\w\-\w]+)',lines)
 
 print matches
 looper = len(matches)
+loopy = 0
 
 contents = []
 ts = time.time()
@@ -46,39 +47,46 @@ stat = ""
 LINK_TO_OP_TWEET_FILE = "http://pastebin.com/raw.php?i=hmW17JgF"
 
 def tweet(sc):
-        global stat, looper, ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET
-        response = urllib2.urlopen(LINK_TO_OP_TWEET_FILE)
-        contents = response.readlines()
-        stat = contents[random.randrange(0,len(contents))]
-        status = stat[:-2]
-        loop = looper
+    global stat, loopy, looper, ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET
+    response = urllib2.urlopen(LINK_TO_OP_TWEET_FILE)
+    contents = response.readlines()
+    stat = contents[random.randrange(0,len(contents))]
+    status = stat[:-2]
+    loopy = looper
 
-        while True:
-            while loop != 0:
-                for keys_ in matches:
-                    print "Generating ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET for your account ... "
-                    ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET = keys_
-                    loop = loop - 1
-                    try:
-                        if len(status) > 140:
-                            print 'This [',status[:20],'...',status[-20:],'] Tweet has more than 140 characters! \n\n Please contact the owner of the paste, TheDentist on #opindia at anonops.\n'
-                            stat = contents[random.randrange(0,len(contents))]
-                            status = stat[:-2]
-                        else:
-                            print "\nTweeting...", st
-                            print "", status
-                            """
-                            auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-                            auth.set_access_token(ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET)
-                            api = tweepy.API(auth)
-                            result = api.update_status(status)
-                            """
-                            break
-                    except tweepy.error.TweepError as e:
-                        print("\nTwitter error received...", e.message)
-                        print("Trying again...")
+    while True:
+        while loopy > 0:
+            for keys_ in matches:
+                try:
+                    if len(status) > 140:
+                        print '\nThis [',status[:20],'...',status[-20:],'] Tweet has more than 140 characters! \n\n Please contact the owner of the paste, TheDentist on #opindia at anonops.\n'
                         stat = contents[random.randrange(0,len(contents))]
-            sc.enter(60, 1, tweet, (sc,)) #Edit the "120" if you wish to speed or slow down the tweets. Time is in seconds. IE: 120 = 2 minutes
+                        status = stat[:-2]
+                    else:
+                        print "\nGenerating ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET for your account ... "
+                        ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET = keys_
+                        print "\nTweeting ... for ACCESS_TOKEN_KEY",ACCESS_TOKEN_KEY,"and ACCESS_TOKEN_KEY",ACCESS_TOKEN_SECRET, st
+                        print "", status
+                        print loopy
+                        loopy = loopy - 1
+                        
+                        """
+                        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+                        auth.set_access_token(ACCESS_TOKEN_KEY, ACCESS_TOKEN_SECRET)
+                        api = tweepy.API(auth)
+                        result = api.update_status(status)
+                        """
+                        break
+                except tweepy.error.TweepError as e:
+                    print "\nTwitter error received...", e.message
+                    print "Trying again..."
+                    stat = contents[random.randrange(0,len(contents))]
+        break
+        if loopy == 0:
+            loopy = looper
+
+       
+    sc.enter(1, 1, tweet, (sc,)) #Edit the "120" if you wish to speed or slow down the tweets. Time is in seconds. IE: 120 = 2 minutes
 
 
 
